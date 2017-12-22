@@ -34,6 +34,11 @@ public class ProjectileDragging : MonoBehaviour
 
         CircleCollider2D circle = GetComponent<Collider2D>() as CircleCollider2D;
         circleRadius = circle.radius;
+
+        rb.mass = 5.0f;
+        rb.drag = 0.1f;
+        rb.angularDrag = 1.0f;
+        rb.gravityScale = 1.0f;
     }
 
     void LineRendererSetup()
