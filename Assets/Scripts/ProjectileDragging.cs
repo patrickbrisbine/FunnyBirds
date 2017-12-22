@@ -34,6 +34,12 @@ public class ProjectileDragging : MonoBehaviour
 
         CircleCollider2D circle = GetComponent<Collider2D>() as CircleCollider2D;
         circleRadius = circle.radius;
+
+
+        rb.mass = 5.0f;
+        rb.drag = 0.15f;
+        rb.angularDrag = 15.0f;
+        rb.gravityScale = 1.0f;
     }
 
     void LineRendererSetup()
@@ -57,8 +63,11 @@ public class ProjectileDragging : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
-        spring.enabled = false;
-        clickedOn = true;
+        if (spring != null)
+        {
+            spring.enabled = false;
+            clickedOn = true;
+        }
     }
 
     /// <summary>
@@ -66,9 +75,12 @@ public class ProjectileDragging : MonoBehaviour
     /// </summary>
     void OnMouseUp()
     {
-        spring.enabled = true;
-        rb.isKinematic = false;
-        clickedOn = false;
+        if (spring != null)
+        {
+            spring.enabled = true;
+            rb.isKinematic = false;
+            clickedOn = false;
+        }
     }
 
     void Update()
