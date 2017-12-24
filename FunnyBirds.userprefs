@@ -1,18 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Catapult.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Projectile.cs">
     <Files>
-      <File FileName="Assets\Scripts\Projectile.cs" Line="24" Column="28" />
-      <File FileName="Assets\Scripts\FollowProjectile.cs" Line="12" Column="1" />
-      <File FileName="Assets\Scripts\GameReset.cs" Line="62" Column="10" />
-      <File FileName="Assets\Scripts\DamageTarget.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Catapult.cs" Line="43" Column="24" />
+      <File FileName="Assets\Scripts\Projectile.cs" Line="42" Column="46" />
+      <File FileName="Assets\Scripts\Catapult.cs" Line="111" Column="25" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\patri\Documents\FunnyBirds\Assets\Scripts\ProjectileDragging.cs" line="64" column="1" />
-      <Breakpoint file="C:\Users\patri\Documents\FunnyBirds\Assets\Scripts\Catapult.cs" line="24" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

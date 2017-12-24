@@ -14,22 +14,25 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float maxStretch = 3.0f;
-    public LineRenderer catapultLineFront;
-    public LineRenderer catapultLineBack;
+    public float MaxStretch = 3.0f;
+    public float CircleRadius;
+    public bool isLoaded;
 
+    /// Saved references for other scripts
     private FollowProjectile followProjectile;
     private GameReset gameReset;
+    private Catapult catapult;
 
+    /// Saved references to components for this object
     private Rigidbody2D rb;
     private SpringJoint2D spring;
-    private Transform catapult;
-    private Ray rayToMouse;
-    private Ray leftCatapultToProjectile;
+
+    /// Saved references to other objects
+    private Rigidbody2D catapultRigidBody;
+
     private float maxStretchSquared;
-    private float circleRadius;
-    private bool clickedOn;
-    private bool isLoaded;
+    public bool clickedOn;
+
     private bool isFired = false;
     private Vector2 prevVelocity;
 
@@ -37,13 +40,15 @@ public class Projectile : MonoBehaviour
     {
         followProjectile = GameObject.FindObjectOfType(typeof(FollowProjectile)) as FollowProjectile;
         gameReset = GameObject.FindObjectOfType(typeof(GameReset)) as GameReset;
+        catapult = GameObject.FindObjectOfType(typeof(Catapult)) as Catapult;
+
+        catapultRigidBody = GameObject.Find("/Catapult").GetComponent<Rigidbody2D>();
 
         spring = GetComponent<SpringJoint2D>();
-        catapult = spring.connectedBody.transform;
 
-        circleRadius = (GetComponent<Collider2D>() as CircleCollider2D).radius;
+        CircleRadius = (GetComponent<Collider2D>() as CircleCollider2D).radius;
 
-        maxStretchSquared = maxStretch * maxStretch;
+        maxStretchSquared = MaxStretch * MaxStretch;
 
         rb = GetComponent<Rigidbody2D>();
         rb.mass = 5.0f;
@@ -57,37 +62,12 @@ public class Projectile : MonoBehaviour
 
     }
 
-    void InitCatapult()
-    {
-        Debug.Log("Front " + catapultLineFront.isVisible);
-        Debug.Log("Back " + catapultLineBack.isVisible);
-
-        catapultLineFront.enabled = true;
-        catapultLineBack.enabled = true;
-
-        catapultLineFront.SetPosition(0, catapultLineFront.transform.position);
-        catapultLineBack.SetPosition(0, catapultLineBack.transform.position);
-
-        catapultLineFront.sortingLayerName = "Foreground";
-        catapultLineBack.sortingLayerName = "Foreground";
-
-        catapultLineFront.sortingOrder = 3;
-        catapultLineBack.sortingOrder = 1;
-
-        catapultLineFront.material.color = Color.black;
-        catapultLineBack.material.color = Color.black;
-
-        rayToMouse = new Ray(catapult.position, Vector3.zero);
-    }
-
     /// <summary>
     /// OnMouseDown is called when the user has pressed the mouse button while
     /// over the GUIElement or Collider.
     /// </summary>
     void OnMouseDown()
     {
-        Debug.Log(String.Format("OnMouseDown isFired {0}", isFired));
-
         if (!isFired)
         {
             if (spring != null && isLoaded)
@@ -98,22 +78,24 @@ public class Projectile : MonoBehaviour
             else
             {
                 AttachProjectileToCatapult();
-                InitCatapult();
             }
         }
     }
 
     private void AttachProjectileToCatapult()
     {
-        Debug.Log(String.Format("AttachProjectileToCatapult isFired {0}", isFired));
-
         if (!isFired)
         {
-            leftCatapultToProjectile = new Ray(catapultLineFront.transform.position, Vector3.zero);
-            rb.position = new Vector3(-9.0f, -5.0f, 0.0f);
-            followProjectile.projectile = rb.transform;
-            gameReset.projectile = rb;
-            isLoaded = true;
+            if (catapult.LoadProjectile(rb))
+            {
+                rb.position = new Vector3(-9.0f, -5.0f, 0.0f);
+                catapult.LineRendererUpdate();
+                followProjectile.projectile = rb.transform;
+                gameReset.projectile = rb;
+
+                spring.connectedBody = catapultRigidBody;
+                isLoaded = true;
+            }
         }
     }
 
@@ -122,8 +104,6 @@ public class Projectile : MonoBehaviour
     /// </summary>
     void OnMouseUp()
     {
-        Debug.Log(String.Format("OnMouseUp: isFired {0} isLoaded {1} clickedOn {2} spring {3}", isFired, isLoaded, clickedOn, spring));
-
         if (isFired)
         {
             return;
@@ -138,14 +118,14 @@ public class Projectile : MonoBehaviour
                 clickedOn = false;
                 isLoaded = false;
                 isFired = true;
+
+                catapult.FireProjectile();
             }
         }
     }
 
     void Update()
     {
-        Debug.Log(String.Format("Update: spring {0}", spring));
-
         if (spring != null)
         {
             if (clickedOn)
@@ -168,50 +148,21 @@ public class Projectile : MonoBehaviour
                 prevVelocity = rb.velocity;
             }
 
-            LineRendererUpdate();
+            catapult.LineRendererUpdate();
         }
-        else
-        {
-            //catapultLineFront.enabled = false;
-            //catapultLineBack.enabled = false;
-        }
-    }
-
-    void LineRendererUpdate()
-    {
-        Debug.Log(String.Format("LineRendererUpdate: isFired {0} isLoaded {1}", isFired, isLoaded));
-
-        if (catapultLineFront == null || catapultLineBack == null)
-        {
-            return;
-        }
-
-        if (!isLoaded)
-        {
-            catapultLineFront.SetPosition(1, new Vector3(-9.35f, -4.86f, 0.0f));
-            catapultLineBack.SetPosition(1, new Vector3(-8.35f, -4.76f, 0.0f));
-            return;
-        }
-
-        Vector2 catapultToProjectile = transform.position - catapultLineFront.transform.position;
-        leftCatapultToProjectile.direction = catapultToProjectile;
-        Vector3 holdPoint = leftCatapultToProjectile.GetPoint(catapultToProjectile.magnitude + circleRadius);
-        catapultLineFront.SetPosition(1, holdPoint);
-        catapultLineBack.SetPosition(1, holdPoint);
     }
 
     void Dragging()
     {
         if (!isFired && isLoaded)
         {
-            Debug.Log(String.Format("Dragging: isFired {0} isLoaded {1}", isFired, isLoaded));
             Vector3 mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 catapultToMouse = mouseWorldPoint - catapult.position;
+            Vector2 catapultToMouse = (Vector2)mouseWorldPoint - catapultRigidBody.position;
 
             if (catapultToMouse.sqrMagnitude > maxStretchSquared)
             {
-                rayToMouse.direction = catapultToMouse;
-                mouseWorldPoint = rayToMouse.GetPoint(maxStretch);
+                catapult.rayToMouse.direction = catapultToMouse;
+                mouseWorldPoint = catapult.rayToMouse.GetPoint(MaxStretch);
             }
 
             mouseWorldPoint.z = 0.0f;
