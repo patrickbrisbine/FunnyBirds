@@ -17,26 +17,39 @@ using UnityEngine.SceneManagement;
 public class GameReset : MonoBehaviour
 {
     public Rigidbody2D projectile;
-    public float resetSpeed = 0.025f;
+    public float resetSpeed = 0.01f;
+    private FollowProjectile followProjectile;
     private float resetSpeedSquared;
     private SpringJoint2D spring;
 
+    void Awake()
+    {
+        projectile = null;
+
+        followProjectile = GameObject.FindObjectOfType(typeof(FollowProjectile)) as FollowProjectile;
+        resetSpeedSquared = resetSpeed * resetSpeed;
+    }
+
     void Start()
     {
-        resetSpeedSquared = resetSpeed * resetSpeed;
-        spring = projectile.GetComponent<SpringJoint2D>();
+
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reset();
+            Restart();
         }
 
-        if (spring == null && projectile.velocity.sqrMagnitude < resetSpeedSquared)
+        if (projectile != null)
         {
-            Reset();
+            spring = projectile.GetComponent<SpringJoint2D>();
+
+            if (spring == null && projectile.velocity.sqrMagnitude < resetSpeedSquared)
+            {
+                NextLaunch();
+            }
         }
     }
 
@@ -44,11 +57,17 @@ public class GameReset : MonoBehaviour
     {
         if (other.GetComponent<Rigidbody2D>() == projectile)
         {
-            Reset();
+            projectile = null;
+            NextLaunch();
         }
     }
 
-    private void Reset()
+    private void NextLaunch()
+    {
+        followProjectile.ResetCamera();
+    }
+
+    private void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

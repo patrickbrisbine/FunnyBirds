@@ -51,10 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Catapult.cs" />
      <Compile Include="Assets\Scripts\DamageTarget.cs" />
      <Compile Include="Assets\Scripts\FollowProjectile.cs" />
      <Compile Include="Assets\Scripts\GameReset.cs" />
-     <Compile Include="Assets\Scripts\ProjectileDragging.cs" />
+     <Compile Include="Assets\Scripts\Projectile.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -15,15 +15,33 @@ using UnityEngine;
 
 public class FollowProjectile : MonoBehaviour
 {
-	public Transform projectile;
-	public Transform farLeft;
-	public Transform farRight;
+    public Transform farLeft;
+    public Transform farRight;
 
-	void Update ()
-	{
-		Vector3 newPosition = transform.position;
-		newPosition.x = projectile.position.x;
-		newPosition.x = Mathf.Clamp(newPosition.x, farLeft.position.x, farRight.position.x);
-		transform.position = newPosition;	
-	}
+    public Transform projectile;
+
+    private Vector3 initialPosition;
+
+    void Awake()
+    {
+        initialPosition = transform.position;
+        projectile = null;
+    }
+
+    void Update()
+    {
+        if (projectile != null)
+        {
+            Vector3 newPosition = transform.position;
+            newPosition.x = projectile.position.x;
+            newPosition.x = Mathf.Clamp(newPosition.x, farLeft.position.x, farRight.position.x);
+            transform.position = newPosition;
+        }
+    }
+
+    public void ResetCamera()
+    {
+        transform.position = initialPosition;
+        projectile = null;
+    }
 }
