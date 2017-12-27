@@ -1,9 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Projectile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DamageTarget.cs">
     <Files>
       <File FileName="Assets\Scripts\Projectile.cs" Line="42" Column="46" />
-      <File FileName="Assets\Scripts\Catapult.cs" Line="111" Column="25" NotebookId="1" />
+      <File FileName="Assets\Standard Assets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" Line="10" Column="36" />
+      <File FileName="Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" Line="20" Column="33" />
+      <File FileName="Assets\Scripts\DamageTarget.cs" Line="52" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

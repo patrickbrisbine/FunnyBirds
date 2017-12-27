@@ -42,13 +42,18 @@ public class GameReset : MonoBehaviour
             Restart();
         }
 
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            NextLaunch();
+        }
+
         if (projectile != null)
         {
             spring = projectile.GetComponent<SpringJoint2D>();
 
             if (spring == null && projectile.velocity.sqrMagnitude < resetSpeedSquared)
             {
-                NextLaunch();
+                //NextLaunch();
             }
         }
     }

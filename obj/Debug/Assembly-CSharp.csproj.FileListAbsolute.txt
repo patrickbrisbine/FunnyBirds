@@ -36,3 +36,4 @@ C:\Users\patri\Documents\FunnyBirds\Temp\bin\Debug\UnityEngine.SpatialTracking.x
 C:\Users\patri\Documents\FunnyBirds\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\patri\Documents\FunnyBirds\obj\Debug\Assembly-CSharp.dll
 C:\Users\patri\Documents\FunnyBirds\obj\Debug\Assembly-CSharp.pdb
+C:\Users\patri\Documents\FunnyBirds\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

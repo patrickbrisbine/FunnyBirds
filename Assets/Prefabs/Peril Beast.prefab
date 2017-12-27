@@ -122,9 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390536b7992be9b468f64df859124e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 3
-  damagedSprite: {fileID: 21300000, guid: 020454aa6d5b5884aadfde730a8cfc46, type: 3}
-  damageImpactSpeed: 5
+  ExplosionPrefab: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
+  HitPoints: 2
+  DamagedSprite: {fileID: 21300000, guid: 020454aa6d5b5884aadfde730a8cfc46, type: 3}
+  DeathSprite: {fileID: 21300000, guid: 351a22f432c371341838835fe27fe7ed, type: 3}
+  DamageImpactSpeed: 5
 --- !u!212 &212432870024647778
 SpriteRenderer:
   m_ObjectHideFlags: 1

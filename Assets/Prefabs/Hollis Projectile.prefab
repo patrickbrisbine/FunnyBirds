@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 231317481670751938}
   - component: {fileID: 114830625404673932}
   m_Layer: 0
-  m_Name: HollisProjectile 1
+  m_Name: Hollis Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
