@@ -10,7 +10,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
 
 public class DamageTarget : MonoBehaviour
 {
@@ -18,35 +17,37 @@ public class DamageTarget : MonoBehaviour
     public Sprite DamagedSprite;
     public float DamageImpactSpeed;
 
-    private int currentHitPoints;
-    private float damageImpactSpeedSquared;
-    private SpriteRenderer spriteRenderer;
+    int currentHitPoints;
+    float damageImpactSpeedSquared;
+    SpriteRenderer spriteRenderer;
 
-    private Transform damageTarget;
-    private GameObject explosion;
-    private SpriteRenderer sprite;
-    private Animator animator;
+    Transform damageTarget;
+    GameObject explosion;
+    SpriteRenderer sprite;
+    Animator animator;
 
-    private bool isExploding = false;
-    private bool isKilled = false;
+    bool isExploding;
+    bool isKilled;
 
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHitPoints = HitPoints;
+        damageImpactSpeedSquared = DamageImpactSpeed * DamageImpactSpeed;
+
         damageTarget = transform;
         explosion = damageTarget.Find("Explosion").gameObject;
         sprite = explosion.GetComponent<SpriteRenderer>();
         animator = explosion.GetComponent<Animator>();
 
         sprite.enabled = false;
-        animator.enabled = false;
+        //animator.enabled = false;
     }
 
     // Use this for initialization
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        currentHitPoints = HitPoints;
-        damageImpactSpeedSquared = DamageImpactSpeed * DamageImpactSpeed;
+
     }
 
     /// <summary>
@@ -76,28 +77,27 @@ public class DamageTarget : MonoBehaviour
 
     void ExplodeOnce()
     {
-        Debug.Log(animator.GetParameter(0).name);
-
         isExploding = false;
         sprite.enabled = true;
         animator.enabled = true;
 
-        animator.SetBool(animator.GetParameter(0).name, true);
+        //animator.Play("Explosion", 0);
 
-        animator.Play("Explode");
+        animator.SetBool(animator.GetParameter(0).name, true);
     }
 
     void Kill()
     {
+        //animator.SetBool(animator.GetParameter(0).name, false);
         sprite.enabled = false;
-        animator.enabled = false;
-        animator.SetBool(animator.GetParameter(0).name, false);
+        //animator.enabled = false;
 
         spriteRenderer.enabled = false;
         spriteRenderer.GetComponent<Collider2D>().enabled = false;
         spriteRenderer.GetComponent<Rigidbody2D>().isKinematic = false;
 
-        Destroy(this);
+        isKilled = false;
+        Destroy(transform.GetComponent<GameObject>(), 0.5f);
     }
 
     // Update is called once per frame

@@ -53,7 +53,7 @@ public class GameReset : MonoBehaviour
 
             if (spring == null && projectile.velocity.sqrMagnitude < resetSpeedSquared)
             {
-                //NextLaunch();
+                NextLaunch();
             }
         }
     }
