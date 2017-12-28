@@ -1,16 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DamageTarget.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameReset.cs">
     <Files>
-      <File FileName="Assets\Scripts\Projectile.cs" Line="42" Column="46" />
-      <File FileName="Assets\Standard Assets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" Line="10" Column="36" />
-      <File FileName="Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" Line="20" Column="33" />
-      <File FileName="Assets\Scripts\DamageTarget.cs" Line="52" Column="13" />
+      <File FileName="Assets\Scripts\Projectile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DamageTarget.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FollowProjectile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Catapult.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameReset.cs" Line="65" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\patri\Documents\FunnyBirds\Assets\Scripts\ProjectileDragging.cs" line="64" column="1" />
+      <Breakpoint file="C:\Users\patri\Documents\FunnyBirds\Assets\Scripts\DamageTarget.cs" line="92" column="1" />
+      <Breakpoint file="C:\Users\patri\Documents\FunnyBirds\Assets\Scripts\DamageTarget.cs" line="84" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

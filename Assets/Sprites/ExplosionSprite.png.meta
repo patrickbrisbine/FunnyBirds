@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 02caf2529e444a14ab5eae5fafab7fd4
-timeCreated: 1514328185
+timeCreated: 1514423815
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -86,7 +86,7 @@ TextureImporter:
         width: 784
         height: 721
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -96,25 +96,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1079
-        y: 1123
-        width: 913
-        height: 925
+        y: 1016
+        width: 905
+        height: 1032
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ExplosionSprite_2
-      rect:
-        serializedVersion: 2
-        x: 1617
-        y: 1027
-        width: 154
-        height: 114
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -128,7 +114,7 @@ TextureImporter:
         width: 795
         height: 694
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,7 +128,7 @@ TextureImporter:
         width: 390
         height: 337
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -9,18 +9,17 @@
  * Written by Patrick Brisbine December 2017
  */
  
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameReset : MonoBehaviour
 {
     public Rigidbody2D projectile;
     public float resetSpeed = 0.01f;
-    private FollowProjectile followProjectile;
-    private float resetSpeedSquared;
-    private SpringJoint2D spring;
+    FollowProjectile followProjectile;
+    float resetSpeedSquared;
+    SpringJoint2D spring;
 
     void Awake()
     {
@@ -44,7 +43,7 @@ public class GameReset : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            NextLaunch();
+            StartCoroutine(NextLaunch());
         }
 
         if (projectile != null)
@@ -53,26 +52,29 @@ public class GameReset : MonoBehaviour
 
             if (spring == null && projectile.velocity.sqrMagnitude < resetSpeedSquared)
             {
-                //NextLaunch();
+                
+                StartCoroutine(NextLaunch(1.0f));
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.GetComponent<Rigidbody2D>() == projectile)
         {
             projectile = null;
-            NextLaunch();
+            StartCoroutine(NextLaunch());
         }
     }
 
-    private void NextLaunch()
+    IEnumerator NextLaunch(float wait = 0.0f)
     {
+        yield return new WaitForSeconds(wait);
+
         followProjectile.ResetCamera();
     }
 
-    private void Restart()
+    void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
